@@ -1,0 +1,17 @@
+import { createRouter } from '@tanstack/react-router'
+import { rootRoute } from './routes/root'
+import { indexRoute } from './routes/index'
+
+// The single page portfolio only requires the indexRoute
+const routeTree = rootRoute.addChildren([indexRoute])
+
+export const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+})
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
