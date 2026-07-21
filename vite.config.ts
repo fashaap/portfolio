@@ -5,4 +5,6 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Tambahkan baris di bawah ini agar asset (CSS/JS) terbaca relatif dari index.html
+  base: './', 
 })

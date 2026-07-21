@@ -45,7 +45,7 @@ export function AboutSection() {
             Hi, I'm Fasha Azhi Putra, a Software Engineering student at Telkom University. I enjoy building reliable, high-throughput backend services and systems, balancing robust database design and low-latency API logic with a strong focus on clean interface design.
           </p>
           <p className="text-gray-700 text-sm sm:text-base font-medium leading-relaxed mb-10">
-            Beyond the back end, I'm also drawn to UI/UX design — making sure every system I build isn't just functional, but intuitive and pleasant to use, bridging the gap between how a product works and how it feels.
+            Beyond the back end, I'm also drawn to UI/UX design making sure every system I build isn't just functional, but intuitive and pleasant to use, bridging the gap between how a product works and how it feels.
           </p>
 
           {/* Core Competencies Grid */}
