@@ -55,8 +55,8 @@ jobs:
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
         username: ${{ secrets.FTP_USERNAME }}
-        host: ${{ secrets.FTP_SERVER }}
+        server: ${{ secrets.FTP_SERVER }}
         password: ${{ secrets.FTP_PASSWORD }}
         port: 22
-        local_path: './dist'                    # gunakan folder, bukan glob
-        remote_path: '/home/stelmfvh/fashaazhidev.my.id/fasha'  # path yang kamu berikan
+        local_path: './dist'
+        remote_path: '/home/stelmfvh/fashaazhidev.my.id/fasha'
