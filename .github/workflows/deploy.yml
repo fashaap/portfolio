@@ -28,7 +28,7 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Debug: show node & directory contents
+    - name: "Debug: show node & directory contents"
       run: |
         echo "Working directory: $(pwd)"
         node -v
