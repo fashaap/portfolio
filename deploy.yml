@@ -1,0 +1,35 @@
+name: Deploy React Vite TS to cPanel
+
+on:
+  push:
+    branches:
+      - main # Skrip berjalan otomatis setiap Anda push ke branch main
+
+jobs:
+  web-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20 # Menyesuaikan dengan versi Node.js umum
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Build project
+      run: npm run build
+      
+    - name: Sync files to cPanel
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: ./ # Menggunakan ./ karena FTP sudah diarahkan langsung ke folder fashaazhidev.my.id
