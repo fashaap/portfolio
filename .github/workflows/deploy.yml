@@ -9,43 +9,43 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: |
-        if [ -f package-lock.json ]; then npm ci; else npm install; fi
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-    - name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build
 
-    - name: "Debug: Show directory contents"
-      run: |
-        echo "Working directory: $(pwd)"
-        echo "Contents of dist:"
-        ls -la dist || echo "dist not found"
+      - name: "Debug: Show directory contents"
+        run: |
+          echo "Working directory: $(pwd)"
+          echo "Contents of dist:"
+          ls -la dist || echo "dist not found"
 
-    - name: Verify SSH secrets
-      shell: bash
-      run: |
-        if [ -z "${{ secrets.SSH_HOST }}" ] || [ -z "${{ secrets.SSH_USERNAME }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.SSH_PORT }}" ]; then
-          echo "::error::Missing one or more required secrets: SSH_HOST, SSH_USERNAME, SSH_PRIVATE_KEY, SSH_PORT"
-          exit 1
-        fi
-        echo "All required secrets present."
+      - name: Verify SSH secrets
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.SSH_HOST }}" ] || [ -z "${{ secrets.SSH_USERNAME }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.SSH_PORT }}" ]; then
+            echo "::error::Missing one or more required secrets: SSH_HOST, SSH_USERNAME, SSH_PRIVATE_KEY, SSH_PORT"
+            exit 1
+          fi
+          echo "All required secrets present."
 
-    - name: Deploy via SFTP
-      uses: easingthemes/ssh-deploy@main
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        REMOTE_HOST: ${{ secrets.SSH_HOST }}
-        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-        REMOTE_PORT: ${{ secrets.SSH_PORT }}
-        SOURCE: "dist/"
-        TARGET: "/home/stelmfvh/fashaazhidev.my.id/fasha/"
-        ARGS: "-rlgoDzvc -i
+      - name: Deploy via SFTP
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          SOURCE: "dist/"
+          TARGET: "/home/stelmfvh/fashaazhidev.my.id/fasha/"
+          ARGS: "-rlgoDzvc -i --delete"
