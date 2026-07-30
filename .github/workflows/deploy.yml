@@ -26,6 +26,16 @@ jobs:
     - name: Build project
       run: npm run build
       
+    - name: Debug: show node & dir
+      run: |
+        node -v
+        npm -v
+        pwd
+        ls -la
+        echo "Contents of dist (if exists):"
+        ls -la dist || echo "dist not found"
+        echo "--- End of debug ---"
+        
     - name: Sync files to cPanel via SFTP
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
@@ -33,5 +43,5 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         password: ${{ secrets.FTP_PASSWORD }}
         port: 22 # Menggunakan jalur port SSH/SFTP standar cPanel
-        local_path: './dist/*' # Mengirim isi folder hasil build Vite
-        remote_path: '/home/stelmfvh/fashaazhidev.my.id' # Sesuaikan dengan jalur direktori hosting Anda
+        local_path: './dist' # Mengirim isi folder hasil build Vite (gunakan folder, bukan glob)
+        remote_path: '/home/stelmfvh/fashaazhidev.my.id/fasha' # Sesuaikan dengan jalur direktori hosting Anda
