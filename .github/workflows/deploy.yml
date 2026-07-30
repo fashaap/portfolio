@@ -1,39 +1,30 @@
 name: Deploy React Vite TS to cPanel
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
-
     - name: Install dependencies
-      # Menggunakan npm ci untuk install yang konsisten, fallback ke npm install
       run: |
         if [ -f package-lock.json ]; then npm ci; else npm install; fi
-
     - name: Build project
       run: npm run build
-
     - name: "Debug: Show directory contents"
       run: |
         echo "Working directory: $(pwd)"
         echo "Contents of dist:"
         ls -la dist || echo "dist not found"
-
     - name: Verify FTP secrets
       shell: bash
       run: |
@@ -42,7 +33,6 @@ jobs:
           exit 1
         fi
         echo "All required secrets present."
-
     - name: Sync files to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -50,9 +40,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         port: 21
-        # Path folder build di GitHub Actions (wajib pakai garis miring di akhir)
-        local-dir: ./dist/ 
-        
-        # Path tujuan di cPanel (wajib pakai garis miring di akhir)
-        # Asumsi akun FTP Anda login ke folder /home/stelmfvh/
+        protocol: ftps
+        local-dir: ./dist/
         server-dir: fashaazhidev.my.id/fasha/
+        log-level: verbose
