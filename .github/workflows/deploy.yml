@@ -18,7 +18,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 24 # Menggunakan Node 24 agar error peringatan hilang
+        node-version: 20
         
     - name: Install dependencies
       run: npm install
@@ -27,11 +27,11 @@ jobs:
       run: npm run build
       
     - name: Sync files to cPanel
-      uses: sebastianpopp/ftp-action@v2.0.0
+      uses: AfonsoMatos/FTP-Deploy-Action@v1.2.0
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USERNAME }}
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        localDir: 'dist' # Folder hasil build proyek Vite Anda
-        remoteDir: '.' # Mengarah langsung ke root folder subdomain/domain Anda
-        forcePasv: true # Memaksa mode pasif agar menembus firewall shared hosting
+        local_dir: ./dist # Folder hasil build Vite
+        remote_dir: ./     # Root folder di cPanel Anda
+        passive: true      # Memaksa mode pasif agar menembus firewall shared hosting
