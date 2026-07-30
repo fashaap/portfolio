@@ -1,4 +1,4 @@
-name: Deploy React Vite TS to cPanel
+name: Deploy React Vite TS to cPanel via SFTP
 on:
   push:
     branches:
@@ -11,36 +11,41 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
+
     - name: Install dependencies
       run: |
         if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
     - name: Build project
       run: npm run build
+
     - name: "Debug: Show directory contents"
       run: |
         echo "Working directory: $(pwd)"
         echo "Contents of dist:"
         ls -la dist || echo "dist not found"
-    - name: Verify FTP secrets
+
+    - name: Verify SSH secrets
       shell: bash
       run: |
-        if [ -z "${{ secrets.FTP_USERNAME }}" ] || [ -z "${{ secrets.FTP_SERVER }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
-          echo "::error::Missing one or more required secrets: FTP_USERNAME, FTP_SERVER, FTP_PASSWORD"
+        if [ -z "${{ secrets.SSH_HOST }}" ] || [ -z "${{ secrets.SSH_USERNAME }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.SSH_PORT }}" ]; then
+          echo "::error::Missing one or more required secrets: SSH_HOST, SSH_USERNAME, SSH_PRIVATE_KEY, SSH_PORT"
           exit 1
         fi
         echo "All required secrets present."
-    - name: Sync files to cPanel via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+
+    - name: Deploy via SFTP
+      uses: easingthemes/ssh-deploy@main
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: 21
-        protocol: ftps
-        local-dir: ./dist/
-        server-dir: fashaazhidev.my.id/fasha/
-        log-level: verbose
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.SSH_HOST }}
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        REMOTE_PORT: ${{ secrets.SSH_PORT }}
+        SOURCE: "dist/"
+        TARGET: "/home/stelmfvh/fashaazhidev.my.id/fasha/"
+        ARGS: "-rlgoDzvc -i
