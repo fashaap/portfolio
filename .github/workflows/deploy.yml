@@ -26,12 +26,12 @@ jobs:
     - name: Build project
       run: npm run build
       
-    - name: Sync files to cPanel
-      uses: AfonsoMatos/FTP-Deploy-Action@v1.2.0
+    - name: Sync files to cPanel via SFTP
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
+        host: ${{ secrets.FTP_SERVER }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local_dir: ./dist # Folder hasil build Vite
-        remote_dir: ./     # Root folder di cPanel Anda
-        passive: true      # Memaksa mode pasif agar menembus firewall shared hosting
+        port: 22 # Menggunakan jalur port SSH/SFTP standar cPanel
+        local_path: './dist/*' # Mengirim isi folder hasil build Vite
+        remote_path: '/home/stelmfvh/fashaazhidev.my.id' # Sesuaikan dengan jalur direktori hosting Anda
