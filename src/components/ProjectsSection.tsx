@@ -38,9 +38,9 @@ const projects: Project[] = [
     liveUrl: 'https://github.com'
   },
   {
-    title: 'Synapse API Gateway',
-    dirName: 'synapse_gateway',
-    fileName: 'synapse_gateway.ts',
+    title: 'tht API Gateway',
+    dirName: 'tht_gateway',
+    fileName: 'tht_gateway.ts',
     lang: 'typescript',
     description: 'Dynamic edge routing, rate limiting, and JWT authentication service designed to orchestrate low-latency microservice architectures.',
     tech: ['Node.js', 'TypeScript', 'Redis', 'Docker'],
