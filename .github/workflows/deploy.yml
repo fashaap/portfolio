@@ -1,4 +1,4 @@
-name: Deploy React Vite TS to cPanel via SFTP
+name: Deploy React Vite TS to cPanel via Git
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   build-and-deploy:
-    name: Build and Deploy
+    name: Build and Push to Deploy Branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,28 +24,20 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: "Debug: Show directory contents"
+      - name: Add cPanel deployment script
         run: |
-          echo "Working directory: $(pwd)"
-          echo "Contents of dist:"
-          ls -la dist || echo "dist not found"
+          cat > dist/.cpanel.yml << 'EOF'
+          ---
+          deployment:
+            tasks:
+              - export DEPLOYPATH=/home/stelmfvh/fashaazhidev.my.id/fasha/
+              - /bin/cp -R * $DEPLOYPATH
+          EOF
 
-      - name: Verify SSH secrets
-        shell: bash
-        run: |
-          if [ -z "${{ secrets.SSH_HOST }}" ] || [ -z "${{ secrets.SSH_USERNAME }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] || [ -z "${{ secrets.SSH_PORT }}" ]; then
-            echo "::error::Missing one or more required secrets: SSH_HOST, SSH_USERNAME, SSH_PRIVATE_KEY, SSH_PORT"
-            exit 1
-          fi
-          echo "All required secrets present."
-
-      - name: Deploy via SFTP
-        uses: easingthemes/ssh-deploy@main
+      - name: Push build output to "deploy" branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          REMOTE_PORT: ${{ secrets.SSH_PORT }}
-          SOURCE: "dist/"
-          TARGET: "/home/stelmfvh/fashaazhidev.my.id/fasha/"
-          ARGS: "-rlgoDzvc -i --delete"
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deploy
+          force_orphan: true
