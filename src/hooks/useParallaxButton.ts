@@ -17,8 +17,8 @@ interface UseParallaxButtonReturn {
 }
 
 const INITIAL_COORDS: Coords = { x: 0, y: 0, rx: 0, ry: 0 }
-const MAX_TRANSLATE = 14 // px — magnetic pulling limit
-const MAX_TILT = 16      // deg — 3D tilt limit
+const MAX_TRANSLATE = 14
+const MAX_TILT = 16
 
 export function useParallaxButton(): UseParallaxButtonReturn {
   const buttonRef = useRef<HTMLAnchorElement>(null)

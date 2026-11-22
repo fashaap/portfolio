@@ -45,13 +45,13 @@ export function ParallaxButton({ to, children }: ParallaxButtonProps) {
             : 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), shadow 0.2s',
         }}
       >
-        {/* Glow / Reflection shimmer on hover */}
+
         <span
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none"
           style={{ transform: 'translateZ(5px)' }}
         />
 
-        {/* Inner content popping out in 3D */}
+
         <span
           className="flex items-center gap-2 md:gap-[0.5vw]"
           style={{

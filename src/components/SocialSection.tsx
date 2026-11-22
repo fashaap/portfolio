@@ -70,7 +70,7 @@ export function SocialSection() {
         }`}
     >
       <div className="flex justify-center">
-        {/* Solid card */}
+
         <div className="
           w-fit
           bg-white
@@ -80,12 +80,12 @@ export function SocialSection() {
           transition-all duration-500
         ">
 
-          {/* Heading inside card */}
-          <h2 className="text-gray-900 text-xl sm:text-2xl font-bold tracking-tight text-center mb-6">
+
+          <h2 className="text-black text-xl sm:text-2xl font-bold tracking-tight text-center mb-6">
             Social Media
           </h2>
 
-          {/* Icon row */}
+
           <div
             onMouseLeave={() => setHoveredIdx(null)}
             className="flex items-end justify-center gap-4 sm:gap-5"

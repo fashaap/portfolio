@@ -26,23 +26,23 @@ function RootComponent() {
 
   return (
     <ThemeContext.Provider value={{ yellowMode, setYellowMode }}>
-      <div className={`relative min-h-screen w-full overflow-x-hidden transition-colors duration-500 ${yellowMode ? 'bg-[#EBFF00]' : 'bg-[#F4F4F4]'
+      <div className={`relative min-h-screen w-full overflow-x-clip transition-colors duration-500 ${yellowMode ? 'bg-[#EBFF00]' : 'bg-[#F4F4F4]'
         }`}>
 
-        {/* Global Dot Grid Overlay */}
+
         <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none z-[1]" />
 
-        {/* Global Dynamic Vector Pen (Full Page Background Wrapper) */}
+
         <div className="absolute inset-0 pointer-events-none z-[2] overflow-hidden">
           <div
             className="absolute left-1/2 -translate-x-1/2 transition-all duration-500"
             style={{
-              top: '-150px', // Proportionally scaled top offset
-              width: '1600px', // Scaled width (2/3 of 2400px)
-              height: '3220px', // Scaled height (2/3 of 4831px)
-              maskImage: "url('/vector_pen_full.svg')",
-              WebkitMaskImage: "url('/vector_pen_full.svg')",
-              maskSize: '100% 100%', // Allows the SVG to scale dynamically with the container dimensions
+              top: '-150px',
+              width: '1600px',
+              height: '7270px',
+              maskImage: "url('/vector_pen_full_v3.svg')",
+              WebkitMaskImage: "url('/vector_pen_full_v3.svg')",
+              maskSize: '100% 100%',
               WebkitMaskSize: '100% 100%',
               maskRepeat: 'no-repeat',
               WebkitMaskRepeat: 'no-repeat',
@@ -53,7 +53,7 @@ function RootComponent() {
           />
         </div>
 
-        {/* Global Ambient Glow Blobs */}
+
         <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden">
           <div
             className="absolute top-[15%] left-[-5%] w-[30vw] h-[30vw] min-w-[280px] min-h-[280px] rounded-full bg-blue-600/4 blur-[100px] animate-pulse"
@@ -65,15 +65,15 @@ function RootComponent() {
           />
         </div>
 
-        {/* Navbar */}
+
         <Navbar yellowMode={yellowMode} setYellowMode={setYellowMode} />
 
-        {/* Page Content (wrapped inside relative container to sit above background blobs) */}
+
         <main className="relative z-[10] w-full">
           <Outlet />
         </main>
 
-        
+
       </div>
     </ThemeContext.Provider>
   )

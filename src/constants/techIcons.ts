@@ -1,0 +1,37 @@
+import type { IconType } from 'react-icons'
+import {
+  SiAstro,
+  SiCpanel,
+  SiCss,
+  SiDocker,
+  SiExpress,
+  SiFirebase,
+  SiHtml5,
+  SiJavascript,
+  SiLaravel,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiRedis,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si'
+
+export const techIcons: Record<string, IconType> = {
+  'Astro JS': SiAstro,
+  Laravel: SiLaravel,
+  'Tailwind-CSS': SiTailwindcss,
+  cPanel: SiCpanel,
+  'React JS': SiReact,
+  'React Native': SiReact,
+  'EXPRESS JS': SiExpress,
+  POSTGRESQL: SiPostgresql,
+  FIREBASE: SiFirebase,
+  'Node.js': SiNodedotjs,
+  TypeScript: SiTypescript,
+  Redis: SiRedis,
+  Docker: SiDocker,
+  HTML: SiHtml5,
+  CSS: SiCss,
+  Javascript: SiJavascript,
+}

@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { navLinks } from '../constants/nav'
+import { MdMenu, MdMenuOpen } from 'react-icons/md'
+import { useActiveNavSection } from '../hooks/useActiveNavSection'
 
 interface NavbarProps {
   yellowMode: boolean
@@ -8,31 +10,7 @@ interface NavbarProps {
 
 export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeId, setActiveId] = useState('home')
-
-  // Automatically update the active nav link based on viewport scroll position
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      {
-        threshold: 0.2, // trigger when 20% of section is visible
-        rootMargin: '-20% 0px -40% 0px' // adjust focus window towards center
-      }
-    )
-
-    navLinks.forEach((link) => {
-      const el = document.getElementById(link.id)
-      if (el) observer.observe(el)
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  const { activeId, setActiveId } = useActiveNavSection()
 
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id)
@@ -52,7 +30,7 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
         border border-white/20 rounded-2xl
         shadow-lg shadow-black/5
       ">
-        {/* Logo */}
+
         <button
           onClick={() => handleNavClick('home')}
           className="font-extrabold text-blue-600 text-xl tracking-tight select-none cursor-pointer"
@@ -60,7 +38,7 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
           FSH.
         </button>
 
-        {/* Desktop links */}
+
         <div className="hidden md:flex items-center gap-[2vw] text-sm font-semibold">
           {navLinks.map(link => {
             const isActive = activeId === link.id
@@ -83,9 +61,9 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
           })}
         </div>
 
-        {/* Right actions: Theme switcher + Hamburger */}
+
         <div className="flex items-center gap-4">
-          {/* Mode Switcher */}
+
           <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/40 shadow-sm">
             <button
               onClick={() => setYellowMode(false)}
@@ -107,18 +85,18 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
             />
           </div>
 
-          {/* Mobile hamburger */}
+
           <button
             className="md:hidden text-gray-950 hover:text-blue-600 transition text-2xl leading-none cursor-pointer"
             onClick={() => setMenuOpen(o => !o)}
             aria-label="Toggle navigation"
           >
-            {menuOpen ? '✕' : '☰'}
+            {menuOpen ? <MdMenuOpen /> : <MdMenu />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile dropdown */}
+
       {menuOpen && (
         <div className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-white/80 backdrop-blur-md border border-white/20 rounded-2xl p-5 flex flex-col gap-4 shadow-xl">
           {navLinks.map(link => {
