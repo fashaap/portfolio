@@ -32,15 +32,6 @@ export function AboutSection() {
 
 
         <div className="p-6 sm:p-12">
-{/* 
-          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-600/20 px-3.5 py-1 rounded-full mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-            <span className="font-mono-tech text-[10px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase">
-              About Me
-            </span>
-          </div> */}
-
-
           <p className="text-gray-700 text-sm sm:text-base font-medium leading-relaxed mb-6">
               Halo, saya Fasha Azhi Putra, mahasiswa Software Engineering di Telkom University. Saya senang berkarya melalui codingan yang diimplementasikan menjadi sebuah produk, dari design hingga codingan yang membuat antarmuka menjadi lebih nyaman dipakai hingga mudah untuk digunakan. Selain itu, Hobi saya bermain game, menonton Windah Basudara, dan mengeksplor hal yang baru.
           </p>

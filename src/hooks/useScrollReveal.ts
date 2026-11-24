@@ -13,7 +13,6 @@ export function useScrollReveal() {
         }
       },
       {
-        // Tall sections may never reach a large intersection ratio on mobile.
         threshold: 0,
         rootMargin: '0px 0px 12% 0px',
       }

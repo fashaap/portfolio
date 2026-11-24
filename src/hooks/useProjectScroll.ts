@@ -21,8 +21,6 @@ export function useProjectScroll(sectionRef: RefObject<HTMLElement | null>, proj
     const section = sectionRef.current
     if (sectionTop === undefined || !section) return
 
-    // Match the scroll progress range (section height minus viewport), which
-    // remains accurate when Safari changes its browser chrome/viewport height.
     const scrollRange = Math.max(0, section.offsetHeight - window.innerHeight)
 
     window.scrollTo({

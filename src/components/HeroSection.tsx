@@ -93,7 +93,6 @@ export function HeroSection({ yellowMode }: HeroSectionProps) {
 
           <h1 className="text-gray-950 text-[9vw] sm:text-5xl md:text-[5.5vw] font-black tracking-tight leading-[1] md:leading-[0.95] mb-3 md:mb-4 text-center md:text-left flex flex-col items-center md:items-start select-none">
             <span className="flex flex-col items-center md:items-start text-blue-600 text-[0.8em] leading-[0.9]">
-              {/* <WaveText text="HAI" delayOffset={0.1} /> */}
               <WaveText text="SELAMAT DATANG" delayOffset={0.6} />
             </span>
           </h1>
