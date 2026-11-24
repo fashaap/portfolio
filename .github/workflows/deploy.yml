@@ -1,4 +1,4 @@
-name: Deploy React Vite TS to cPanel via Git
+name: Deploy React Vite TS to Vercel via Git
 on:
   push:
     branches:
