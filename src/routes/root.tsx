@@ -54,7 +54,7 @@ function RootComponent() {
         </div>
 
 
-        <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden">
+        <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden max-md:hidden">
           <div
             className="absolute top-[15%] left-[-5%] w-[30vw] h-[30vw] min-w-[280px] min-h-[280px] rounded-full bg-blue-600/4 blur-[100px] animate-pulse"
             style={{ animationDuration: '10s' }}

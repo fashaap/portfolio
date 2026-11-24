@@ -58,6 +58,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep the decorative hero text static on small touch devices. The continuous
+   wide transforms and large fixed blur layers can make iOS scrolling janky. */
+@media (max-width: 767px) {
+  .marquee-band > div {
+    animation-play-state: paused !important;
+    will-change: auto;
+  }
+}
+
 
 ::-webkit-scrollbar {
   width: 10px;

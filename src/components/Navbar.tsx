@@ -26,7 +26,7 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
       <nav className="
         flex justify-between items-center
         px-6 py-3.5
-        bg-white/40 backdrop-blur-md
+        bg-white/85 md:bg-white/40 md:backdrop-blur-md
         border border-white/20 rounded-2xl
         shadow-lg shadow-black/5
       ">
@@ -64,7 +64,7 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
 
         <div className="flex items-center gap-4">
 
-          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/40 shadow-sm">
+          <div className="flex items-center gap-2 bg-white/90 md:bg-white/60 md:backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/40 shadow-sm">
             <button
               onClick={() => setYellowMode(false)}
               className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
@@ -98,7 +98,7 @@ export function Navbar({ yellowMode, setYellowMode }: NavbarProps) {
 
 
       {menuOpen && (
-        <div className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-white/80 backdrop-blur-md border border-white/20 rounded-2xl p-5 flex flex-col gap-4 shadow-xl">
+        <div className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-white/95 border border-white/20 rounded-2xl p-5 flex flex-col gap-4 shadow-xl">
           {navLinks.map(link => {
             const isActive = activeId === link.id
             return (

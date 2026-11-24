@@ -7,7 +7,7 @@ export function Footer() {
                 <div className="
           flex flex-col md:flex-row items-center justify-between gap-8
           px-6 py-8
-          bg-white/40 backdrop-blur-md
+          bg-white/80 md:bg-white/40 md:backdrop-blur-md
           border border-white/20 rounded-2xl
           shadow-lg shadow-black/5
           transition-all duration-500
