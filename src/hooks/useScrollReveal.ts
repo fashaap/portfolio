@@ -9,10 +9,13 @@ export function useScrollReveal() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
+          observer.disconnect()
         }
       },
       {
-        threshold: 0.1,
+        // Tall sections may never reach a large intersection ratio on mobile.
+        threshold: 0,
+        rootMargin: '0px 0px 12% 0px',
       }
     )
 

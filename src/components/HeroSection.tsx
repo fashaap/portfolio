@@ -86,7 +86,7 @@ export function HeroSection({ yellowMode }: HeroSectionProps) {
           <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-600/20 px-3.5 py-1 rounded-full mb-3 md:mb-4 min-h-[28px] sm:min-h-[32px]">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
             <span className="font-mono-tech text-[10px] sm:text-xs font-bold tracking-widest text-blue-600 uppercase select-none">
-              <TextRotator words={['UI/UX Designer', 'Back-End Developer']} />
+              <TextRotator words={['UI/UX Designer', 'Front-End Developer', 'Back-End Developer']} />
             </span>
           </div>
 
